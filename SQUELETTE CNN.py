@@ -59,7 +59,7 @@ class CNN():
                               constant_values=0)
 
         #2 DIMENSION DE SORTIE (même nombre de sorties que de filtres
-        H,L,C = self.image_shape
+        #H,L,C = self.image_shape
         image_sortie = np.zeros((self.image_shape[0], self.image_shape[1], self.nb_filtres))
 
         #3 BOUCLE
@@ -90,7 +90,7 @@ class CNN():
 
         return output
 
-    def pooling_operation(self, images, *, size=2, methode:"MAX"):
+    def pooling_operation(self, images, *, size=2, methode:"max"):
         """
         La fonction de pulling prends une certaine tialle de fenêtre et applique le pooling dessus
         :param images: Image prises en paramètres, qui possède N canal (H,L,N)
@@ -102,7 +102,6 @@ class CNN():
         """
         H, L, C = images.shape
 
-        taille = 2  # Taille de la fenêtre de pooling
         pas = 2
 
         H_out = H // 2
@@ -115,7 +114,7 @@ class CNN():
             for i in range(H_out):
                 for j in range(L_out):
                     start_i, start_j = i * pas, j * pas
-                    patch = images[start_i:start_i + taille, start_j:start_j + taille, f]
+                    patch = images[start_i:start_i + size, start_j:start_j + size, f]
 
                     # Application de l'opération selon le choix (Max ou Average)
                     if self.pooling == "max":
